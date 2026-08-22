@@ -1,7 +1,9 @@
-module alu(input logic [3:0] a,b,input logic [2:0] select,input logic cin,output logic [3:0] f, output logic cout);
+module alu(input logic [3:0] a,b,input logic [2:0] select,input logic cin,input clk,rst_n,output logic [3:0] f, output logic cout);
 
                 // inner signals
                 logic [3:0] b_sel,f_arth,f_logic;
+                logic [3:0] u_f;
+                logic  u_cout;
                 logic cin_sel;
 
                 assign cin_sel = cin;
@@ -64,10 +66,24 @@ module alu(input logic [3:0] a,b,input logic [2:0] select,input logic cin,output
                     endcase
 
                     
-                end
+                end       
 
-                top_adder adder(.a(a),.b(b_sel),.cin(cin_sel),.sum(f_arth),.cout(cout));
-                assign f = (select>3)? f_logic : f_arth ;
+                top_adder adder(.a(a),.b(b_sel),.cin(cin_sel),.sum(f_arth),.cout(u_cout));
+                assign u_f = (select>3)? f_logic : f_arth ;
+
+                always_ff@(posedge clk or negedge rst_n)
+                begin
+                        if(rst_n==0)
+                        begin
+                                f <= 0;
+                                cout <= 0;
+                        end
+                        else
+                        begin
+                                f<=u_f;
+                                cout<=u_cout;
+                        end
+                end
 
 
 
