@@ -3,8 +3,10 @@ TOPLEVEL_LANG ?= verilog
 
 VERILOG_SOURCES += $(PWD)/*.sv
 
-TOPLEVEL = top_adder
-MODULE = test_full_adder
+TOPLEVEL = alu
+MODULE = test_alu
+
+EXTRA_ARGS += --trace --trace-structs 
 
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
