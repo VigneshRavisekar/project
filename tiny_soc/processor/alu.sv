@@ -5,70 +5,76 @@ module alu(input logic [3:0] a,b,input logic [2:0] select,input logic cin,input 
                 logic [3:0] u_f;
                 logic  u_cout;
                 logic cin_sel;
+        
+                always_comb begin
 
-                assign cin_sel = cin;
+                        if(({select,cin}==1))
+                                cin_sel = 0;
+                        else
+                                cin_sel = cin;
+                end
+
+
 
                 always_comb begin
 
-                    b_sel   = 0;
-                    f_logic = 0;
+                        b_sel   = 0;
+                        f_logic = 0;
 
-                    case(select)
 
-                        3'b000: 
-                                begin
-                                      if(cin_sel == 0)
+                        case({select,cin}) inside 
 
-                                            b_sel = 0;
-                                      else
-                                            b_sel = 1;
-                                end
-                        
-                        3'b001: 
-                                begin
-                                        b_sel = b;
-                                end
-                        
-                        3'b010: 
-                                begin
-                                        b_sel = ~ b;
-                                end
-                        
-                        3'b011: 
-                                begin
-                                       if(cin_sel==1)
-                                            b_sel = -1;
-                                       else 
-                                            b_sel = 15;
-                                end
-                        3'b100:
-                                begin
-                                        f_logic = a | b;
-                                end
-                        
-                        3'b101:
-                                begin 
-                                        f_logic = a ^ b;
-                                end
+                                4'b0000:
 
-                        3'b110:
-                                begin
-                                        f_logic = a & b;
-                                end
+                                       b_sel = 0;
+
+                                4'b0001:
+
+                                       
+                                        b_sel = 1;
                                 
-                        3'b111:
+                                       
 
-                                begin
-                                        f_logic = ~a;
-                                end                  
-                        
-                        
-                    endcase
+                                4'b0010, 4'b0011:
 
-                    
-                end       
+                                       b_sel = b;
+                             
 
+                                4'b0100, 4'b0101:
+
+                                       b_sel = ~b;
+
+                                4'b0110:
+
+                                       b_sel = -1;
+                                
+                                4'b0111:
+
+                                       b_sel = 15;
+                                
+                                4'b100?:
+
+                                       f_logic = a | b;
+                                
+                                4'b0101?:
+
+                                       f_logic = a ^ b;
+                                
+                                4'b110?:
+
+                                       f_logic = a & b;
+
+                                4'b111?:
+
+                                       f_logic = ~a;
+
+
+                        endcase
+                end
+                
                 top_adder adder(.a(a),.b(b_sel),.cin(cin_sel),.sum(f_arth),.cout(u_cout));
+
+
                 assign u_f = (select>3)? f_logic : f_arth ;
 
                 always_ff@(posedge clk or negedge rst_n)
