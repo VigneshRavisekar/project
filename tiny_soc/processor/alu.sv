@@ -56,7 +56,7 @@ module alu(input logic [3:0] a,b,input logic [2:0] select,input logic cin,input 
 
                                        f_logic = a | b;
                                 
-                                4'b0101?:
+                                4'b101?:
 
                                        f_logic = a ^ b;
                                 
