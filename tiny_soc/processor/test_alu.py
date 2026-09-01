@@ -8,16 +8,36 @@ import logging
 log = logging.getLogger("cocotb")
 
 
-def comparsion_block(output,dut_out,dut_cout):
+def comparsion_block(output,op_code,dut_out,dut_cout):
 
-            tb_out = int(output.binstr[-4:], 2)
-            tb_cout = int(output.binstr[-5],2)
-            print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{tb_out}")
-            if tb_out == dut_out and tb_cout == dut_cout :
-                  log.info("COMPARISON PASSED!!!")
+            if op_code == 0 or op_code == 7:
+
+                  tb_out  = int(output)
+                  print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{tb_out}")
+                  if tb_out == dut_out:
+                              log.info("COMPARISON PASSED!!!")
+                  else:
+                              log.error("COMPARISON FAILED!!!")
+
+            elif op_code >= 1 and op_code <7:
+
+                  tb_out = int(output.binstr[-4:], 2)
+                  tb_cout = int(output.binstr[-5],2)
+                  print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{tb_out} *** ALU_COUT: {dut_cout} || TB_COUT: {tb_cout} ")
+                  if tb_out == dut_out and tb_cout == dut_cout :
+                        log.info("COMPARISON PASSED!!!")
+                  else:
+                        log.error("COMPARISON FAILED!!!")
+
             else:
-                  log.error("COMPARISON FAILED!!!")
-            
+                   output = BinaryValue(output,n_bits=5,bigEndian=False)
+                   tb_out = int(output.binstr[-4:], 2)
+                   tb_cout = int(output.binstr[-5],2)
+                   print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{tb_out} *** ALU_COUT: {dut_cout} || TB_COUT: {tb_cout} ")
+                   if tb_out == dut_out and tb_cout == dut_cout:
+                                log.info("COMPARISON PASSED!!!")
+                   else:
+                                log.error("COMPARISON FAILED!!!")
       
 
 
@@ -27,9 +47,9 @@ def arithmetic_block(in_1,in_2,select,cin,cout):
         print(select,cin)   
         opcode = int(str(select) + str(cin),2)
         print(f"OPCODE:{opcode}")     
-        if opcode == 0:
-              
-              f = BinaryValue(in_1,n_bits=5,bigEndian=False)
+        if opcode == 0 or opcode == 7:
+
+              f = in_1
      
         elif opcode == 1:
               
@@ -47,21 +67,18 @@ def arithmetic_block(in_1,in_2,select,cin,cout):
               
         elif opcode == 4:
 
-              f = BinaryValue(in_1 + ~in_2,n_bits = 5,bigEndian=False)
+              in_2_n = BinaryValue(~(in_2))
+              f = BinaryValue(in_1 + in_2_n,n_bits = 5,bigEndian=False)
              
         elif opcode == 5:
 
-              f = BinaryValue(in_1 + (~in_2) + 1 ,n_bits = 5,bigEndian=False)
+              in_2_n = BinaryValue(~(in_2))
+              f = BinaryValue(in_1 + in_2_n + 1 ,n_bits = 5,bigEndian=False)
 
         elif opcode == 6:
               
-              f = BinaryValue(in_1 - 1,n_bits=5,bigEndian=False)
-              print(in_1)
-              print(f)
-
-        elif opcode == 7:
-              
-              f = BinaryValue(in_1,n_bits=5,bigEndian=False)
+              f = BinaryValue(in_1 + 15,n_bits=5,bigEndian=False) # -1 is reprsented as 15 
+           
         else:
               log.error("INCORRECT OPCODE")
               
@@ -112,6 +129,7 @@ class alu_base:
             await Timer(1,"ns")
             if int(self.select.value) < 4:
 
+                
                  result = arithmetic_block(self.a.value,self.b.value,self.select.value,self.cin.value,self.cout.value)
 
             else:
@@ -125,72 +143,50 @@ class alu_base:
          
     
     
-# @cocotb.test()
-# async def test_arithmetic_operation(dut):
-
-#     alu = alu_base(dut)
-#     cocotb.start_soon(Clock(alu.clk,1,"ns").start())
-#     alu.rst_n.value = 0
-#     await Timer(2,"ns")
-#     alu.rst_n.value = 1
-#     for _ in range(10):
-#         alu.select.value = random.randint(0,3)
-#         alu.a.value = random.randint(0,15)
-#         alu.b.value = random.randint(0,15)
-#         alu.cin.value = random.randint(0,1)
-#         await Timer(1,"ns")
-#         print(f"A_VALUE:{int(alu.a.value)}")
-#         print(f"B_VALUE:{int(alu.b.value)}")
-#         print(f"CIN_VALUE:{alu.cin.value}")
-#         print(f"SELECT_VALUE:{int(alu.select.value)}")
-#         output = await alu.selector()
-#         comparsion_block(output,alu.f.value,alu.cout.value)
-
-# @cocotb.test()
-# async def test_logical_operation(dut):
-
-#          alu = alu_base(dut)
-#          cocotb.start_soon(Clock(alu.clk,1,"ns").start())
-#          alu.rst_n.value = 0
-#          await Timer(2,"ns")
-#          alu.rst_n.value = 1
-#          for _ in range(10):
-#              alu.select.value = random.randint(4,7)
-#              alu.a.value = random.randint(0,15)
-#              alu.b.value = random.randint(0,15)
-#              alu.cin.value = random.randint(0,1)
-#              await Timer(1,"ns")
-#              print(f"A_VALUE:{int(alu.a.value)}")
-#              print(f"B_VALUE:{int(alu.b.value)}")
-#              print(f"CIN_VALUE:{alu.cin.value}")
-#              print(f"SELECT_VALUE:{int(alu.select.value)}")
-#              output = await alu.selector()
-#              comparsion_block(output,alu.f.value,alu.cout.value)
-      
-
-      
 @cocotb.test()
-async def individual(dut):
+async def test_arithmetic_operation(dut):
 
     alu = alu_base(dut)
     cocotb.start_soon(Clock(alu.clk,1,"ns").start())
     alu.rst_n.value = 0
     await Timer(2,"ns")
     alu.rst_n.value = 1
-    alu.a.value = 12
-    alu.b.value = 11
-    alu.select.value = 3
-    alu.cin.value = 0
-    await Timer(1,"ns")
-    print(f"A_VALUE:{int(alu.a.value)}")
-    print(f"B_VALUE:{int(alu.b.value)}")
-    print(f"CIN_VALUE:{alu.cin.value}")
-    print(f"SELECT_VALUE:{int(alu.select.value)}")
-    output = await alu.selector()
-    print(f"AAA:{output}")
-    comparsion_block(output,alu.f.value,alu.cout.value)
+    for _ in range(10):
+        alu.select.value = random.randint(0,3)
+        alu.a.value = random.randint(0,15)
+        alu.b.value = random.randint(0,15)
+        alu.cin.value = random.randint(0,1)
+        await Timer(1,"ns")
+        print(f"A_VALUE:{int(alu.a.value)}")
+        print(f"B_VALUE:{int(alu.b.value)}")
+        print(f"CIN_VALUE:{alu.cin.value}")
+        print(f"SELECT_VALUE:{int(alu.select.value)}")
+        opcode = int(str(alu.select.value) + str(alu.cin.value),2)
+        output = await alu.selector()
+        comparsion_block(output,opcode,alu.f.value,alu.cout.value)
 
+@cocotb.test()
+async def test_logical_operation(dut):
 
+         alu = alu_base(dut)
+         cocotb.start_soon(Clock(alu.clk,1,"ns").start())
+         alu.rst_n.value = 0
+         await Timer(2,"ns")
+         alu.rst_n.value = 1
+         for _ in range(10):
+             alu.select.value = random.randint(4,7)
+             alu.a.value = random.randint(0,15)
+             alu.b.value = random.randint(0,15)
+             alu.cin.value = random.randint(0,1)
+             await Timer(1,"ns")
+             print(f"A_VALUE:{int(alu.a.value)}")
+             print(f"B_VALUE:{int(alu.b.value)}")
+             print(f"CIN_VALUE:{alu.cin.value}")
+             print(f"SELECT_VALUE:{int(alu.select.value)}")
+             opcode = int(str(alu.select.value) + str(alu.cin.value),2)
+             output = await alu.selector()
+             comparsion_block(output,opcode,alu.f.value,alu.cout.value)
+      
 
   
 
