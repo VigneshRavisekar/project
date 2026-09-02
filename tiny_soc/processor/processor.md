@@ -8,11 +8,12 @@
 
 These two images form the baseline for this 4 bit microprocessor
 
-## Design Flaws Identified 
+## Detective Work 
 
 During the implementation of the ALU and while brainstorming about Instruction Decoder, several
 architectural/design issues were identified in the existing 4-bit processor.
 
+**Design Flaw Bucket**
 | # | Design Issue | Observation |
 |---|---|---|
 | 1 | **FETCH state / instruction fetching** | The `FETCH` state in the state diagram does not appear to fetch the instruction. Instead, it fetches data from a RAM location. The instruction-fetch mechanism therefore needs to be reconsidered. |
@@ -24,9 +25,10 @@ architectural/design issues were identified in the existing 4-bit processor.
                                       
 ## Proposed Design Changes
 
-Working on finding even more interesting design flaws(hoping that add more as verif engineer in the design flaw bucket) then improvising the design changes
+Working on finding even more interesting design flaws (hoping to add more as a
+Verif Engineer in the design flaw bucket) and then improvising the design
+changes.
 
 **WORK IN PROGRESS**
- 
 
 
