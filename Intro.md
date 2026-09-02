@@ -1,0 +1,3 @@
+**NEITHER A RISCV PROCESSOR NOR A FANCY PROCESSOR JUST A 4 BIT PROCESSOR**
+---------------------------------------------------------------------------
+As a junior verif engineer (for a year nearly) mostly on cocotb (new age verification technique). Yes, Job was quite fun and interesting. But, due to some personal reasons can't continue my job. After a hitaus joined as postgrad research scholar and during this long leave from clg, thought of exploring asic flow for a small bit processor slowly improvising the design and taking it to sythesis building some tiny soc in between and all the way to asic flow. Yes, riscv is always in pipeline..
