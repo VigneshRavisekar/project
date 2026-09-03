@@ -2,7 +2,6 @@ import cocotb
 import random
 from cocotb.clock import Clock
 from cocotb.triggers import Timer,RisingEdge,FallingEdge,ReadOnly
-from cocotb.binary import BinaryValue
 import logging
 
 log = logging.getLogger("cocotb")
