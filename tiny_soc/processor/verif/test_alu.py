@@ -2,7 +2,7 @@ import cocotb
 import random
 from cocotb.clock import Clock
 from cocotb.triggers import Timer,RisingEdge,FallingEdge
-from cocotb.binary import BinaryValue
+from cocotb.types import LogicArray,Range
 import logging
 
 log = logging.getLogger("cocotb")
@@ -10,6 +10,7 @@ log = logging.getLogger("cocotb")
 
 def comparsion_block(output,op_code,dut_out,dut_cout):
 
+           
             if op_code == 0 or op_code == 7:
 
                   tb_out  = int(output)
@@ -21,8 +22,8 @@ def comparsion_block(output,op_code,dut_out,dut_cout):
 
             elif op_code >= 1 and op_code <7:
 
-                  tb_out = int(output.binstr[-4:], 2)
-                  tb_cout = int(output.binstr[-5],2)
+                  tb_out = int(output[3:0])
+                  tb_cout = int(output[4])
                   print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{tb_out} *** ALU_COUT: {dut_cout} || TB_COUT: {tb_cout} ")
                   if tb_out == dut_out and tb_cout == dut_cout :
                         log.info("COMPARISON PASSED!!!")
@@ -30,11 +31,9 @@ def comparsion_block(output,op_code,dut_out,dut_cout):
                         log.error("COMPARISON FAILED!!!")
 
             else:
-                   output = BinaryValue(output,n_bits=5,bigEndian=False)
-                   tb_out = int(output.binstr[-4:], 2)
-                   tb_cout = int(output.binstr[-5],2)
-                   print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{tb_out} *** ALU_COUT: {dut_cout} || TB_COUT: {tb_cout} ")
-                   if tb_out == dut_out and tb_cout == dut_cout:
+                  
+                   print(f"ALU_OUTPUT:{int(dut_out)} || TB_OUTPUT:{int(output)}")
+                   if output == dut_out:
                                 log.info("COMPARISON PASSED!!!")
                    else:
                                 log.error("COMPARISON FAILED!!!")
@@ -53,32 +52,31 @@ def arithmetic_block(in_1,in_2,select,cin,cout):
      
         elif opcode == 1:
               
-              f = BinaryValue(in_1 + 1,n_bits=5,bigEndian=False)
-              
-     
+              f = LogicArray(int(in_1) + 1,5)
+
+                
         elif opcode == 2:
               
-             
-              f = BinaryValue(in_1 + in_2,n_bits = 5,bigEndian=False)
+                f = LogicArray(int(in_1) + int(in_2),5)
+           
                   
         elif opcode == 3:
 
-              f = BinaryValue(in_1 + in_2+1,n_bits = 5,bigEndian=False)
-              
+              f = LogicArray(int(in_1) + int(in_2) + 1,5)
+          
         elif opcode == 4:
 
-              in_2_n = BinaryValue(~(in_2))
-              f = BinaryValue(in_1 + in_2_n,n_bits = 5,bigEndian=False)
+              f  = LogicArray(int(in_1) + int(~in_2),5)
+         
              
         elif opcode == 5:
 
-              in_2_n = BinaryValue(~(in_2))
-              f = BinaryValue(in_1 + in_2_n + 1 ,n_bits = 5,bigEndian=False)
-
+              f = LogicArray(int(in_1) + int(~(in_2)) + 1 ,5)
+          
         elif opcode == 6:
               
-              f = BinaryValue(in_1 + 15,n_bits=5,bigEndian=False) # -1 is reprsented as 15 
-           
+              f = LogicArray(int(in_1) + 15,5) # -1 is reprsented as 15 
+     
         else:
               log.error("INCORRECT OPCODE")
               
@@ -91,6 +89,7 @@ def logical_block(in_1,in_2,select):
         if int(select) == 4:
               
               f = in_1 | in_2
+             
       
         elif int(select) == 5:
               
@@ -98,11 +97,11 @@ def logical_block(in_1,in_2,select):
      
         elif int(select) == 6:
               
-              f = in_1 & in_2 
+              f = in_1 & in_2
      
         elif int(select) == 7:
               
-              f =  int(~ in_1,2) 
+              f =  ~ in_1
              
         else:
               log.error("INCORRECT OPCODE")
@@ -186,9 +185,7 @@ async def test_logical_operation(dut):
              opcode = int(str(alu.select.value) + str(alu.cin.value),2)
              output = await alu.selector()
              comparsion_block(output,opcode,alu.f.value,alu.cout.value)
-      
 
-  
 
 
 
