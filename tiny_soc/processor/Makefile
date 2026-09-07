@@ -1,12 +1,15 @@
-SIM ?= verilator
+SIM ?= verilator 
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += $(PWD)/*.sv
+VERILOG_SOURCES +=  $(PWD)/rtl/*.sv
 
-TOPLEVEL = alu
-MODULE = test_alu
+TOPLEVEL = ram
+MODULE = test_ram
 
-EXTRA_ARGS += --trace --trace-structs 
+export PYTHONPATH := $(PWD)/verif:$(PYTHONPATH)
+
+
+EXTRA_ARGS += --trace --trace-structs --pins-inout-enables
 
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
