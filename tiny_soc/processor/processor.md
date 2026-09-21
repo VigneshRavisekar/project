@@ -31,4 +31,7 @@ changes.
 
 **WORK IN PROGRESS**
 
+The first step is completely redesigning the architecture, like generating a custom Instruction Set Architecture, where moving the 4-bit processor to an 8-bit processor to support branching, memory operations, and also to address the limitations faced in a 4-bit processor. 
+
+### Instruction Set Architecture 
 
