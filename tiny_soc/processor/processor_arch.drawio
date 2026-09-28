@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" pages="3">
   <diagram name="Processor" id="JKLruMvUurt9t978ZH2a">
-    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="5450" dy="1605" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -119,7 +119,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="9C9Bx5S1hHRkLjlquza0" name="CPU_Internals">
-    <mxGraphModel dx="7700" dy="4140" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -133,6 +133,16 @@
         </mxCell>
         <mxCell id="iFIcLJjQzLWdEYahoGGi-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;&lt;b&gt;ALU&lt;/b&gt;&lt;/font&gt;" vertex="1">
           <mxGeometry height="380" width="600" x="-630" y="-400" as="geometry" />
+        </mxCell>
+        <mxCell id="O7UfgrUDpGobVRaM_rgo-1" edge="1" parent="1" source="iFIcLJjQzLWdEYahoGGi-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;shape=flexArrow;strokeColor=#FF3333;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-940" y="-380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="O7UfgrUDpGobVRaM_rgo-2" connectable="0" parent="O7UfgrUDpGobVRaM_rgo-1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;All Control Signals(Red Dashed Lines) are generated from Control Unit&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.4292" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="iFIcLJjQzLWdEYahoGGi-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;fillColor=#d80073;fontColor=#ffffff;strokeColor=#A50040;" value="&lt;br&gt;&lt;b&gt;&lt;font style=&quot;font-size: 22px;&quot;&gt;Control Unit&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="100" width="740" x="-1310" y="-570" as="geometry" />
