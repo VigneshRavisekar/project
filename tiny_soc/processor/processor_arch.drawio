@@ -111,7 +111,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="9C9Bx5S1hHRkLjlquza0" name="CPU_Internals">
-    <mxGraphModel dx="6670" dy="3532" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3381" dy="1590" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -286,10 +286,10 @@
         <mxCell id="TAdyP5PxfYes8Cfdkpl_-200" parent="TAdyP5PxfYes8Cfdkpl_-37" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="imm[7:0]&lt;br&gt;from instr mem&amp;nbsp;" vertex="1">
           <mxGeometry height="30" width="100" x="200" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="TAdyP5PxfYes8Cfdkpl_-124" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;">
+        <mxCell id="TAdyP5PxfYes8Cfdkpl_-124" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="203.07692307692287" y="-7.692307692307622" as="sourcePoint" />
-            <mxCellPoint x="380" y="215" as="targetPoint" />
+            <mxPoint x="120" y="-10" as="sourcePoint" />
+            <mxPoint x="120" y="80.00000000000023" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="TAdyP5PxfYes8Cfdkpl_-126" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;">
@@ -403,9 +403,6 @@
         </mxCell>
         <mxCell id="TAdyP5PxfYes8Cfdkpl_-204" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#1A1A1A;" value="&lt;span style=&quot;color: rgb(255, 255, 255);&quot;&gt;&lt;b&gt;GT&lt;/b&gt;&lt;/span&gt;" vertex="1">
           <mxGeometry height="30" width="60" x="100" y="95" as="geometry" />
-        </mxCell>
-        <mxCell id="TAdyP5PxfYes8Cfdkpl_-205" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=#1A1A1A;" value="Flag Register" vertex="1">
-          <mxGeometry height="20" width="80" x="100" y="60" as="geometry" />
         </mxCell>
         <mxCell id="TAdyP5PxfYes8Cfdkpl_-206" edge="1" parent="1" source="TAdyP5PxfYes8Cfdkpl_-201" style="endArrow=none;html=1;rounded=0;entryX=1;entryY=0.65;entryDx=0;entryDy=3;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=0;startArrow=classic;startFill=1;" target="TAdyP5PxfYes8Cfdkpl_-190" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
@@ -762,6 +759,9 @@
         </mxCell>
         <mxCell id="b19bdKZ8aGzQtMaLfaqu-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 9px; color: rgb(255, 51, 51);&quot;&gt;isOP&lt;/font&gt;" vertex="1">
           <mxGeometry height="10" width="40" x="-2490" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="t5DR_E7ec3sMdPvzeKM5-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Flag Reg" vertex="1">
+          <mxGeometry height="30" width="60" x="140" y="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
