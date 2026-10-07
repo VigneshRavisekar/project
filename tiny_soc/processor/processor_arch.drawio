@@ -827,7 +827,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="EQTTjfru7IOXSEFDwZbQ" name="Control_Unit">
-    <mxGraphModel dx="2289" dy="1351" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="299" dy="177" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -941,7 +941,7 @@
             <mxPoint x="990" y="500" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="-kbaLsoMWtzZ_-aZeyU3-28" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;EXECUTE_BRANCH&lt;br&gt;&lt;/b&gt;&lt;b&gt;isBranch&lt;br&gt;isUCB,isbeq,isbgt based on C/NC&lt;br&gt;&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+        <mxCell id="-kbaLsoMWtzZ_-aZeyU3-28" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;b&gt;EXECUTE_BRANCH&lt;br&gt;&lt;/b&gt;&lt;b&gt;isBranch&lt;br&gt;isUCB,isbeq,isbgt based on UC/C(E/GT)&lt;br&gt;&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="90" width="150" x="1270" y="330" as="geometry" />
         </mxCell>
         <mxCell id="-kbaLsoMWtzZ_-aZeyU3-29" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;color: rgb(255, 51, 51);&quot;&gt;instr[7:5]&lt;br&gt;opcode: 111&lt;/span&gt;" vertex="1">
