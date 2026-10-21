@@ -35,3 +35,5 @@ The first step is completely redesigning the architecture, like generating a cus
 
 ### Instruction Set Architecture 
 
+This is the proposed ISA compact one which can handle 18 instructions with each instruction occupying 8 bits and subdivided into arithmetic/logical, compare, memory and branching instructions. Several instructions share same opcode with several field bits distinguishing the instructions. Attaching the ISA document.
+
